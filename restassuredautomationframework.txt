@@ -1,0 +1,26 @@
+             rest assured automation framework development
+             ------------------------------------------------
+
+
+automation framework development
+software framework is structure that you can use to build software/create test case
+it help you to avoid duplicate and redudant code.
+able to focus on writing code specific to the project.
+can be extented.
+readibility
+maintability
+reusability
+
+main object of framework is to maintan all commonly  used project related file.
+Hybrid framework
+----------------
+steps
+-----
+1. understand requirment
+   function requirment specification a swagger
+2. Rest Assured Library
+3. Design
+4. Development
+5. Execution & continue integration
+
+

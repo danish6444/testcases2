@@ -1,0 +1,105 @@
+package automation;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
+public class Assignment3 {
+	public void Fuse() 
+	{
+		System.setProperty("webdriver.chrome.driver","D:\\Training Materials\\workspace\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		driver.get("http://sfwebhtml:t63KUfxL5vUyFLG4eqZNUcuRQ@sfwebhtml.sourcefuse.com/automation-form-demo-for-interview/");
+
+
+		driver.findElement(By.xpath("//div[@id='fnameInput']//input[@type='text']")).sendKeys("Danish");
+		driver.findElement(By.xpath("//div[@id='lnameInput']//input[@type='text']")).sendKeys("Khan");
+		driver.findElement(By.xpath("//input[@type='email']")).sendKeys("khandanish2503@gmail.com");
+		driver.findElement(By.xpath("//div[@id='curCompanyInput']//input[@type='text']")).sendKeys("PDC TECH UJJAIN");
+		driver.findElement(By.xpath("//input[@type='tel']")).sendKeys("9691111405");
+		driver.findElement(By.xpath("//div[@class='input-group date']//input[@type='text']")).sendKeys("03/25/1990");
+		driver.findElement(By.xpath("//div[@id='positionInput']//input[@type='text']")).sendKeys("Automation Testing Eng");
+		driver.findElement(By.xpath("//input[@value='http://']")).sendKeys("www.sbi.com");
+		driver.findElement(By.xpath("//div[@id='salaryInput']//input[@type='text']")).sendKeys("550000");
+		driver.findElement(By.xpath("//div[@id='whenStartInput']//input[@type='text']")).sendKeys("07/15/2023");
+		driver.findElement(By.xpath("//textarea[@id='address']")).sendKeys("mig 10 mpbh khandwa");
+		//input[@id='yes']
+		driver.findElement(By.xpath("//input[@id='yes']")).click();
+		//input[@id='resume']
+		driver.findElement(By.xpath("//input[@id='resume']")).sendKeys("D:\\danish resume\\Fresher resume.docx");
+		System.out.println(driver.getTitle());
+
+		List <WebElement> icon = driver.findElements(By.tagName("Label"));
+		System.out.println("Total links on webpage:" + icon.size());
+
+		for(WebElement el:icon)
+		{
+			System.out.println(el.getText());
+		}
+
+		//soft assert
+		System.out.println("verifying presence of field2 input");
+		WebElement field2 = driver.findElement(By.tagName("label"));
+		Assert.assertTrue(field2.isDisplayed());
+		System.out.println("field2 is display + " );
+
+		//hard assertion
+		System.out.println("verifying presence of field input");
+		WebElement field = driver.findElement(By.tagName("label"));
+		Assert.assertTrue(field.isDisplayed());
+		System.out.println("field is diplay + ");
+
+
+		//submit form
+		driver.findElement(By.xpath("//button[normalize-space()='Submit Form']")).click();
+
+		//establish connection
+		try {
+			String url = "jdbc:mysql://localhost:3306/db";
+			String username = "root";
+			String password = "Asad@12345";
+
+			Connection conn = DriverManager.getConnection(url,username,password);
+			Statement stm = conn.createStatement();
+			System.out.println("connection successfully");
+
+			String query = "create table student (sid int(3), semail varchar(200))";
+			stm.execute(query);
+			System.out.println("table create successfully");
+			
+		
+
+
+		//execute prepared statement to retrieve the filter rec from the student tab
+		PreparedStatement prearedStatement = conn.prepareStatement("select email from employee");
+		prearedStatement.setString(1,"sid");
+		prearedStatement.setString(2,"email");
+		ResultSet resultSet2 = prearedStatement.executeQuery();
+	    while(resultSet2.next()) 
+		{
+			System.out.println(resultSet2.getString("email"));
+		}
+	}catch (Exception e) {
+		e.printStackTrace();
+	}
+
+		
+		//conn.close();
+	driver.close();
+
+			
+	}}
+	
+
